@@ -24,6 +24,13 @@ def decode(digits, base):
     # TODO: Decode digits from any base (2 up to 36)
     # ...
 
+    base10_num = 0
+    digits = digits[::-1]   # reverses the index order so read from right to left instead of left to right
+
+    for i in range(len(digits)):    # get each digit
+        digit = int(digits[i], base=base)   # each individual digit as a number
+        base10_num += digit * base ** i     # ex: 1011 = (1*2^3) + (1*2^1) + (1*2^0) binary --> dec
+    return base10_num
 
 def encode(number, base):
     """Encode given number in base 10 to digits in given base.
@@ -37,9 +44,31 @@ def encode(number, base):
     # TODO: Encode number in binary (base 2)
     # ...
     # TODO: Encode number in hexadecimal (base 16)
-    # ...
+    # divide number by 16, keep remainder
+    # continue dividing by 16 until there 
     # TODO: Encode number in any base (2 up to 36)
-    # ...
+
+    # decimal to hex: 75. 75/16 (division) = 4 (remainder = 11). 4/16 = 0 (remainder 4) --> 11, 4 --> 4B
+    # string.digits is '0123456789'
+    # string.ascii_lowercase is 'abcdefghijklmnopqrstuvwxyz'
+    # base_digits = (string.digits + string.ascii_uppercase) # <-- this handles all bases even those with letters
+    # string.printable() String of ASCII characters which are considered printable. This is a combination of digits, ascii_letters, punctuation, and whitespace.
+    # https://docs.python.org/3/library/string.html
+
+
+    encoded_num = ""
+
+    while number > 0:   # while the number is greater than 0
+        # number = number // base   # divide the number by the base. // returns a integer / returns a float
+        # remainder = number % base   # % returns the modulous which is the remainder
+        number, remainder = divmod(number, base)
+
+        if remainder >= 10:     # if the remainder is greater than or equal to 10
+            encoded_num += string.printable[remainder]   # convert the remainder to its associated number
+        else:
+            encoded_num += str(remainder) # else it is just the number of the remainder
+
+    return encoded_num[::-1]    # returns the reverse order
 
 
 def convert(digits, base1, base2):
@@ -59,7 +88,9 @@ def convert(digits, base1, base2):
     # ...
     # TODO: Convert digits from any base to any base (2 up to 36)
     # ...
-
+    base10 = decode(digits, base1)
+    result = encode(base10, base2)
+    return result
 
 def main():
     """Read command-line arguments and convert given digits between bases."""
@@ -76,6 +107,8 @@ def main():
         print('Usage: {} digits base1 base2'.format(sys.argv[0]))
         print('Converts digits from base1 to base2')
 
+# print(decode('1011', 2)) # (1*2^3) + (1*2^1) + (1*2^0) = 11
+# print(decode('3D', 16)) # (13*16^0) + (3*16^1) = 61
 
 if __name__ == '__main__':
     main()

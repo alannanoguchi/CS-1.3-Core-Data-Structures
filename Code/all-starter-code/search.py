@@ -22,12 +22,12 @@ def linear_search_recursive(array, item, index=0):
     # to verify that your recursive implementation passes all tests
 
     # base case 1
-    if item == array[index]:
-        return index
-
-    # base case 2
     if index >= len(array):     # we searched through the entire list and never found the item
         return None
+
+    # base case 2
+    if array[index] == item:     # we found the index, return it
+        return index
 
     # recursive case
     else:
@@ -78,8 +78,6 @@ def binary_search_iterative(array, item):
 
 
 
-
-
 def binary_search_recursive(array, item, left=None, right=None):
     # TODO: implement binary search recursively here
     pass
@@ -97,7 +95,7 @@ def binary_search_recursive(array, item, left=None, right=None):
             return mid_index 
 
     # recursive case 1
-    elif item < array[mid_index]:
+    if array[mid_index] > item:
         return binary_search_recursive(array, item, left, mid_index - 1)
     # recursive case 2    
     else:

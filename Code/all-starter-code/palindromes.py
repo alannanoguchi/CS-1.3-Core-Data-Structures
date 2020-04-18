@@ -22,13 +22,42 @@ def is_palindrome_iterative(text):
     pass
     # once implemented, change is_palindrome to call is_palindrome_iterative
     # to verify that your iterative implementation passes all tests
+    # compare first and last item in string and iterate through the string
+    # check if each char matches, if they don't return false
+    # keep doing this until indicies == or pass eachother
 
+    left_index = 0
+    right_index = len(text) - 1
+    
+    while left_index <= right_index:         # the loop stops so the indexes are not overlapping
+        if text[left_index] != text[right_index]:
+            return False
+        left_index += 1
+        right_index -= 1
+    return True
 
-def is_palindrome_recursive(text, left=None, right=None):
+# print(is_palindrome_iterative("tacocat"))  # True
+# print(is_palindrome_iterative("deed"))   #True
+# print(is_palindrome_iterative("asdf"))    #False
+
+def is_palindrome_recursive(text, left_index, right_index):
     # TODO: implement the is_palindrome function recursively here
     pass
     # once implemented, change is_palindrome to call is_palindrome_recursive
     # to verify that your iterative implementation passes all tests
+
+    # base cases
+    if text[left_index] != text[right_index]:
+        return False
+    if left_index == right_index or left_index > right_index:  # if the left index is equal to the right idnex or if the left index goes past the right index
+        return True
+    # recursive case
+    return is_palindrome_recursive(text, left_index + 1, right_index - 1)
+
+# test_str = 'deed'  # True
+# test_str = 'tacocate'   # False
+# print(is_palindrome_recursive(test_str, 0, len(test_str) -1))
+
 
 
 def main():

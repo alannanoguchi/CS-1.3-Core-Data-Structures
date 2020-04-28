@@ -7,13 +7,30 @@ import string
 # string.ascii_letters is ascii_lowercase + ascii_uppercase
 
 
+# def is_palindrome(text):
+#     """A string of characters is a palindrome if it reads the same forwards and
+#     backwards, ignoring punctuation, whitespace, and letter casing."""
+#     # implement is_palindrome_iterative and is_palindrome_recursive below, then
+#     # change this to call your implementation to verify it passes all tests
+#     assert isinstance(text, str), 'input is not a string: {}'.format(text)
+#     return is_palindrome_iterative(text)
+#     # return is_palindrome_recursive(text)
+
 def is_palindrome(text):
     """A string of characters is a palindrome if it reads the same forwards and
     backwards, ignoring punctuation, whitespace, and letter casing."""
     # implement is_palindrome_iterative and is_palindrome_recursive below, then
     # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str), 'input is not a string: {}'.format(text)
-    return is_palindrome_iterative(text)
+    text = text.rstrip().lower()
+    new_text = ""
+    
+    for character in text:
+        if character in string.ascii_letters:
+            new_text += character
+            
+            
+    return is_palindrome_iterative(new_text)
     # return is_palindrome_recursive(text)
 
 

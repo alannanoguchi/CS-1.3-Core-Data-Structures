@@ -60,6 +60,11 @@ def find_all_indexes(text, pattern):
 
     all_indices = []            # create empty list to append all indices that given pattern appears at
 
+    if pattern == "":
+        for i in range(len(text)):
+            all_indices.append(i)
+        return all_indices
+
     for i in range(len(text) - len(pattern) + 1):             
         for j in range(len(pattern)):    
             if pattern[j] != text[i + j]:   # text[i + j] --> index i increases by the value of j so if j is 0 then i(2) + j(0) = i(2), if j is 1 then i(2) + j(1) = i(3)

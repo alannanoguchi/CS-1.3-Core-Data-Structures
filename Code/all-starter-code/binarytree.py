@@ -19,17 +19,12 @@ class BinaryTreeNode(object):
 
         return self.left is None and self.right is None  # cleaner and more readable code 
         
-       
 
     def is_branch(self):
         """Return True if this node is a branch (has at least one child)."""
         # TODO: Check if either left child or right child has a value
 
         return self.left is not None or self.right is not None  # cleaner and more readbale code
-        # if self.left or self.right:
-        #     return True
-        # else:
-        #     return False
 
     def height(self):
         """Return the height of this node (the number of edges on the longest
@@ -41,8 +36,6 @@ class BinaryTreeNode(object):
         ...
         # Return one more than the greater of the left height and right height
         # if left side is greater than right side then return left side else return right
-        # left_side_count = 0
-        # right_side_count = 0
 
         if self.is_leaf():   # if there are no edges, then it is 0
             return 0
@@ -56,16 +49,6 @@ class BinaryTreeNode(object):
         else:
             # if both sides have a child
             return max(self.left.height(), self.right.height()) + 1 # will return the side with the greater height
-
-        
-        # if self.left:
-        #     left_side_count = self.left.height() + 1
-        # if self.right:
-        #     right_side_count = self.right.height() + 1
-        # if left_side_count > right_side_count:
-        #     return left_side_count
-        # else:
-        #     return right_side_count
 
         
 
@@ -133,9 +116,6 @@ class BinarySearchTree(object):
         # Find the parent node of where the given item should be inserted
         parent = self._find_parent_node_recursive(item, self.root)
         
-        # fix error: 'NoneType'
-        # if parent is None:
-        #     parent = self.root
 
         # TODO: Check if the given item should be inserted left of parent node
         if item < parent.data and parent.left is None:
